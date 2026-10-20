@@ -1,0 +1,337 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>記事LP A案</title><style>
+:root{--orange:#e97626;--ink:#292929;--muted:#666;--line:#e6e6e6;--page:#f7f7f7;--pale:#fff5ec}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:Meiryo,"Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;line-height:1.85;-webkit-text-size-adjust:100%}
+button{font:inherit}
+button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #a74b0b;outline-offset:4px}
+[hidden]{display:none!important}
+.review-head{background:#fff;border-top:5px solid var(--orange);padding:28px 24px}
+.review-head>div{max-width:1020px;margin:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:bold;letter-spacing:.12em;color:var(--muted)}
+.eyebrow:before{content:"";width:7px;height:7px;background:var(--orange);border-radius:50%}
+.review-head h1{font-size:26px;line-height:1.6;margin:8px 0;font-weight:800}
+.review-head p{font-size:13px;margin:0;color:var(--muted)}
+.toolbar{position:sticky;top:0;z-index:5;background:#fff;border-block:1px solid var(--line);box-shadow:0 3px 8px #00000004}
+.tabs{display:flex;gap:9px;max-width:760px;margin:auto;padding:12px 16px}
+.tabs button{flex:1;border:1px solid #ddd;border-radius:40px;padding:10px 8px;background:#fff;color:var(--ink);font-size:14px;font-weight:bold;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--orange);border-color:var(--orange);color:#fff}
+main{max-width:760px;margin:auto;padding:26px 20px 72px}
+.reference{font-size:12px;border-bottom:1px solid #ddd;padding-bottom:18px;margin-bottom:24px}
+.reference summary{cursor:pointer;color:#555}
+.reference img{display:block;width:100%;height:auto;margin-top:16px}
+.reference p{margin:12px 0 0;color:var(--muted)}
+.direction{display:flex;flex-direction:column;gap:4px;margin:0 4px 18px}
+.direction strong{font-size:15px;color:var(--ink)}
+.direction strong:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--orange);margin:0 9px 2px 0}
+.direction span{font-size:13px;color:var(--muted)}
+article{background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;box-shadow:0 6px 22px #00000003}
+.article-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:19px 28px;border-bottom:1px solid var(--line);font-size:12px;font-weight:bold}
+.article-head>span:first-child{border-left:3px solid var(--orange);padding-left:10px}
+.pr{font-size:10px;font-weight:normal;color:var(--muted)}
+.fv-slot{padding:20px 20px 0;background:white}
+.image-slot{display:flex;align-items:center;justify-content:center;position:relative;width:100%;aspect-ratio:var(--image-ratio,16 / 9);margin:30px 0;border:1px solid #c8c8c8;border-radius:0;background:#f5f5f5;color:#555;text-align:center;break-inside:avoid}
+.fv-slot .image-slot{margin:0;background:#f3f3f3}
+.image-slot-inner{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;padding:20px}
+.image-symbol{position:relative;width:38px;height:28px;border:1px solid #a9a9a9;border-radius:1px;background:linear-gradient(135deg,transparent 49%,#c4c4c4 50%,#c4c4c4 52%,transparent 53%) 4px 6px / 23px 19px no-repeat}
+.image-symbol:after{content:"";position:absolute;top:5px;right:6px;width:5px;height:5px;border:1px solid #aaa;border-radius:50%}
+.image-slot-label{font-size:14px;line-height:1.7;font-weight:bold;max-width:90%;overflow-wrap:anywhere}
+.image-slot-size{font-size:11px;color:#6d6d6d;font-weight:normal;letter-spacing:.03em}
+.article-body{padding:36px 38px 0}
+.article-body h1{font-size:27px;font-weight:800;line-height:1.7;letter-spacing:.01em;margin:0 0 32px}
+.article-body h1:after{content:"";display:block;width:48px;height:4px;background:var(--orange);margin-top:24px}
+.article-body p{font-size:16px;line-height:2;margin:0 0 20px;overflow-wrap:anywhere}
+.article-body h2{position:relative;font-size:22px;font-weight:800;line-height:1.7;margin:48px 0 24px;padding:0 0 18px;border-bottom:1px solid #ddd;color:var(--ink)}
+.article-body h2:after{content:"";position:absolute;left:0;bottom:-1px;width:48px;height:3px;background:var(--orange)}
+.correction{margin:30px 0;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.correction>div{padding:20px 24px;background:#f7f7f7}
+.correction>div+div{background:var(--pale);border-top:1px solid #f1dfd0}
+.correction span,.small-label{font-size:11px;font-weight:bold;letter-spacing:.04em;color:#8b460f}
+.correction p{font-size:15px;margin:6px 0 0!important}
+.example{margin:26px 0;padding:22px 24px;background:#f7f7f7;border-left:3px solid var(--orange)}
+.example p{font-size:15px;margin:8px 0 0}
+.case{padding:26px;border:1px solid var(--line);border-top:3px solid var(--orange);border-radius:3px;background:white;margin:26px 0}
+.case h3{font-size:21px;line-height:1.7;margin:10px 0 16px}
+.case .source-note{font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:22px}
+.case .image-slot{margin:22px 0 26px}
+.history{margin:28px 0;display:flex;flex-direction:column;align-items:center;gap:5px}
+.history span{border:1px solid #ddd;background:#fafafa;border-radius:3px;padding:10px 14px;width:100%;text-align:center;font-size:14px}
+.history span:last-child{border-color:#edb68e;background:var(--pale);font-weight:bold}
+.history i{font-style:normal;color:var(--orange);font-size:18px}
+.case-reading{border-top:1px solid var(--line);padding-top:20px}
+.case-reading>strong{font-size:13px;color:#8b460f}
+.case-reading p{font-size:14px;margin:8px 0 0}
+.prompts{padding-left:26px;margin:24px 0}
+.prompts li{padding:8px 0 8px 6px;font-size:15px}
+.prompts li::marker{color:#b2510c;font-weight:bold}
+.cta{margin:44px -38px 0;padding:36px 38px;background:var(--pale);border-top:1px solid #f6e5d7}
+.cta h2{padding:0;border:0;margin:10px 0 18px;font-size:22px}
+.cta h2:after{display:none}
+.cta p{font-size:14px}
+.cta-button{position:relative;display:block;width:100%;min-height:60px;border:0;border-radius:40px;padding:17px 50px 17px 24px;background:var(--orange);color:white;font-size:17px;font-weight:bold;opacity:1}
+.cta-button:after{content:"→";position:absolute;right:23px;top:50%;transform:translateY(-50%);font-size:23px;font-weight:normal}
+.cta .cta-caption{font-size:11px;color:var(--muted);text-align:center;margin:12px 0 0}
+footer{padding:22px 28px;font-size:10px;color:var(--muted);background:#f5f5f5}
+.notes{background:white;padding:30px;border:1px solid var(--line);border-top:3px solid var(--orange);border-radius:3px}
+.notes h2{font-size:22px;line-height:1.65;margin-top:0}
+.notes h3{font-size:17px;margin-top:30px}
+.notes p,.notes li{font-size:14px}
+.notes li{margin-bottom:12px}
+.notes a{color:#984810;text-underline-offset:3px}
+.comparison{padding:20px;background:#f7f7f7;border-left:3px solid var(--orange)}
+.comparison p{margin:0 0 10px}
+.comparison p:last-child{margin:0}
+.status{font-size:12px;color:var(--muted);margin:22px 0 0}
+.back-top{display:block;text-align:center;color:#555;font-size:12px;margin:32px 0 0}
+@media(max-width:600px){
+ .review-head{padding:22px 20px}.review-head h1{font-size:22px}.review-head p{font-size:12px}
+ main{padding:18px 12px 50px}.tabs{padding:10px 12px;gap:6px}.tabs button{font-size:12px;padding:10px 3px}
+ .article-head{padding:15px 20px;font-size:11px}.fv-slot{padding:14px 14px 0}
+ .image-slot-inner{gap:8px;padding:12px}.image-slot-label{font-size:12px;max-width:100%}.image-slot-size{font-size:10px}.image-symbol{width:30px;height:23px}
+ .article-body{padding:28px 22px 0}.article-body h1{font-size:23px}.article-body h2{font-size:20px;margin-top:38px}.article-body p{font-size:15px}
+ .case{padding:20px}.case h3{font-size:19px}.case .source-note{font-size:11px}.case-reading p{font-size:14px}
+ .example{padding:18px}.example p{font-size:14px}.cta{margin-left:-22px;margin-right:-22px;padding:30px 22px}.cta h2{font-size:20px}.cta p{font-size:14px}.cta .cta-caption{font-size:11px}
+ .cta-button{font-size:15px;padding-left:16px;padding-right:40px}.cta-button:after{right:18px;font-size:20px}.desktop-break{display:none}.notes{padding:24px 20px}
+}
+@media print{
+ body{background:white}.review-head,.toolbar,.reference,.back-top{display:none}main{max-width:none;padding:0}
+ section[role=tabpanel][hidden]{display:block!important}section[role=tabpanel]{break-after:page}#notes{display:none!important}article{border:0;box-shadow:none}.direction{margin-top:20px}
+ .case,.example,.correction,.cta,.image-slot{break-inside:avoid}
+}
+
+
+.article-title{font-size:27px;line-height:1.7;margin:0;padding:30px 38px 10px;font-weight:800}
+.article-body{padding-top:24px}
+.article-body .short-copy{font-size:16px;line-height:1.95;margin:0 0 30px}
+.short-copy>span{display:block}
+.reading-beat .image-slot{margin:30px 0 20px}
+.compact-cta{margin-top:0;padding-top:26px}
+.compact-cta .short-copy{margin-bottom:24px}
+@media(max-width:600px){.article-title{font-size:23px;padding:24px 22px 10px}.article-body .short-copy{font-size:15px;line-height:1.9}.reading-beat .image-slot{margin-top:26px}}
+
+.tabs{max-width:1040px;align-items:stretch}.tabs button{border-radius:10px;font-size:13px;line-height:1.6;text-align:left;padding:10px 14px}.tabs .tab-kind{display:block;font-size:11px;margin-bottom:3px}.tabs button[data-tab="notes"]{flex:0 0 88px;text-align:center}.toolbar{position:relative}@media(max-width:600px){.tabs{flex-wrap:wrap;gap:7px}.tabs button[data-tab="a"],.tabs button[data-tab="b"]{flex:1 1 calc(50% - 7px);font-size:11px;padding:9px 10px}.tabs button[data-tab="notes"]{flex:0 0 auto;padding:5px 12px;font-size:11px}.tabs .tab-kind{font-size:10px}}
+
+.article-image{width:100%;margin:28px 0 20px;background:#fff}.article-image img{display:block;width:100%;height:auto;max-width:100%;border-radius:3px}.fv-slot .article-image{margin:0}.article-image figcaption{font-size:10px;line-height:1.7;color:#777;margin:8px 0 0}.case .article-image{margin:22px 0}.article-title{font-size:28px;line-height:1.65}.article-title:first-letter{color:inherit}@media(max-width:600px){.article-title{font-size:23px}.article-image{margin:24px 0 18px}}
+
+.career-map{margin:26px 0 30px;padding:24px 18px 18px;background:#f7f7f7;border:0;border-radius:8px}
+.career-level{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.career-job{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:112px;padding:16px 9px;background:#fff;border:1px solid #e4e4e4;border-radius:6px;text-align:center;box-shadow:0 2px 4px #00000003}
+.career-order{display:block;color:#9a470e;font-size:11px;font-weight:bold;letter-spacing:.06em;line-height:1;background:#fff0e4;padding:6px 9px;border-radius:20px}
+.career-job strong{font-size:16px;line-height:1.6;color:#292929;overflow-wrap:anywhere}
+.skill-connector{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;position:relative;margin:14px 22px;padding:16px 12px 34px;min-height:106px;background:#d96518;color:white;text-align:center;clip-path:polygon(0 0,100% 0,100% calc(100% - 20px),50% 100%,0 calc(100% - 20px))}
+.skill-context{font-size:11px;line-height:1.5;letter-spacing:.04em;color:#fff}
+.skill-connector strong{font-size:19px;line-height:1.6;font-weight:800;color:#fff;overflow-wrap:anywhere}
+.career-destination{grid-template-columns:1fr}
+.career-destination .career-job{min-height:103px;border:2px solid #e97626;background:#fff6ed}
+.career-destination .career-job strong{font-size:23px;color:#a34c10}
+.career-map figcaption{margin-top:18px;font-size:11px;line-height:1.7;text-align:center;color:#666}
+@media(max-width:600px){.career-map{padding:16px 10px}.career-level{gap:8px}.career-job{min-height:102px;padding:13px 6px;gap:8px}.career-job strong{font-size:14px}.career-order{font-size:10px;padding:5px 8px}.skill-connector{margin:12px 8px;padding:14px 8px 30px;min-height:99px}.skill-context{font-size:10px}.skill-connector strong{font-size:16px;line-height:1.55}.career-destination .career-job strong{font-size:21px}}
+
+.case[id]{scroll-margin-top:20px}.case .story-excerpt h3{font-size:23px;line-height:1.7;margin:12px 0 22px}.case .story-excerpt p{font-size:16px;line-height:1.95;margin-bottom:20px}.story-excerpt{margin-bottom:20px}.story-excerpt+p{border-left:3px solid #e97626;padding:12px 16px;background:#fff5ec}.case .source-note{margin-top:18px}@media(max-width:600px){.case .story-excerpt h3{font-size:20px}.case .story-excerpt p{font-size:15px}}
+
+.application-section{margin-top:0;padding-top:28px}.application-section h2{margin:30px 0 12px;font-size:23px}.application-section .application-lead{font-size:14px;line-height:1.9;margin:0 0 24px}
+.application-form{padding:26px;background:white;border:1px solid #f0dfd2;border-radius:8px}.application-form fieldset{border:0;padding:0;margin:0 0 28px;min-width:0}.application-form legend{font-size:16px;font-weight:bold;color:#333;padding:0 0 16px;width:100%;border-bottom:1px solid #eee;margin-bottom:20px}
+.form-field{display:block;margin:0 0 20px}.form-field:last-child{margin-bottom:0}.field-label{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:14px;font-weight:bold;line-height:1.6}.field-label em{font-style:normal;font-size:10px;line-height:1.4;color:#9b450b;background:#fff0e4;padding:3px 6px;border-radius:3px}
+.form-field input{display:block;width:100%;min-width:0;min-height:48px;padding:12px 13px;border:1px solid #ccc;border-radius:5px;background:white;color:#292929;font:inherit;font-size:16px;line-height:1.5;box-sizing:border-box}.form-field input::placeholder{color:#888;opacity:1}.form-field input:focus{outline:2px solid #e97626;outline-offset:1px;border-color:#e97626}
+.salary-input{display:flex;align-items:center;gap:12px}.salary-input input{flex:1}.salary-input>span{font-size:14px;white-space:nowrap}.application-section .employment-note{font-size:12px;color:#666;line-height:1.8;margin:-2px 0 20px}
+.application-submit{cursor:pointer}.application-submit:hover{background:#d66519}.application-section .application-preview-note{font-size:11px;line-height:1.7;color:#777;text-align:center;margin:12px 0 0}.application-section .application-status{font-size:13px;line-height:1.8;margin:18px 0 0;padding:14px;background:#fff5eb;border-left:3px solid #e97626;color:#333}
+@media(max-width:600px){.application-form{padding:20px 16px}.application-section h2{font-size:21px}.field-label{font-size:14px}.application-section .application-lead{font-size:13px}.application-form legend{font-size:15px}}
+
+.case .career-map-title{font-size:18px;line-height:1.75;margin:30px 0 14px;color:#333;font-weight:bold}
+.career-map{margin-top:0}
+.skill-connector{width:calc(100% - 24px);max-width:350px;margin:16px auto;min-height:170px;padding:18px 34px 90px;clip-path:polygon(8% 0,92% 0,92% calc(100% - 72px),100% calc(100% - 72px),50% 100%,0 calc(100% - 72px),8% calc(100% - 72px))}
+@media(max-width:600px){.case .career-map-title{font-size:16px;margin-top:26px}.skill-connector{width:100%;max-width:310px;min-height:155px;margin:14px auto;padding:16px 24px 78px;clip-path:polygon(8% 0,92% 0,92% calc(100% - 60px),100% calc(100% - 60px),50% 100%,0 calc(100% - 60px),8% calc(100% - 60px))}}
+
+.floating-consultation{position:fixed;right:24px;bottom:24px;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;align-items:center;justify-content:center;gap:12px;max-width:calc(100vw - 48px);min-height:56px;padding:15px 22px;border:1px solid #fff;border-radius:40px;background:#d96518;color:#fff;box-shadow:0 5px 22px #0003;font-size:15px;line-height:1.5;font-weight:bold;cursor:pointer}
+.floating-consultation:hover{background:#be5410}.floating-consultation>span{font-size:20px;font-weight:normal}.application-section h2{scroll-margin-top:24px}.application-section h2:focus{outline:none}.application-section h2:focus-visible{outline:2px solid #e97626;outline-offset:6px}
+@media(max-width:600px){.floating-consultation{right:12px;bottom:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 24px);min-height:52px;padding:13px 17px;font-size:13px;gap:8px}}
+@media print{.floating-consultation{display:none!important}}
+
+@keyframes consultation-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.floating-consultation:not([hidden]){animation:consultation-rise 900ms cubic-bezier(.22,.61,.36,1) both}
+@media(prefers-reduced-motion:reduce){.floating-consultation:not([hidden]){animation:none}}
+
+.application-form{padding:20px;line-height:1.5}
+.application-form fieldset{margin-bottom:20px}
+.application-form legend{font-size:14px;line-height:1.4;padding-bottom:10px;margin-bottom:12px}
+.form-field{margin-bottom:12px}
+.field-label{font-size:13px;line-height:1.4;gap:8px;margin-bottom:6px}
+.field-label em{font-size:9px;line-height:1.3;padding:2px 5px}
+.form-field input{font-size:14px;line-height:1.35;min-height:44px;padding:9px 11px}
+.salary-input{gap:9px}.salary-input>span{font-size:13px}
+.application-section .employment-note{font-size:11px;line-height:1.5;margin:0 0 12px}
+.application-section h2{font-size:21px;margin:24px 0 10px}
+.application-section .application-lead{font-size:13px;line-height:1.6;margin-bottom:18px}
+@media(max-width:600px){.application-form{padding:16px}.form-field input{font-size:16px;padding:8px 10px}.application-section h2{font-size:20px}}
+
+.opening-answer{padding:4px 38px 8px}.opening-answer .short-copy{font-size:16px;line-height:1.95;margin:0}.opening-answer .short-copy>span:first-child,#b .opening-answer .short-copy>span:nth-child(2){font-weight:bold;color:#9a470e}
+.skills-foundation{margin:0;padding:32px 24px 26px;background:#fff;border:1px solid #e9e4df;border-radius:18px;text-align:center}
+.skills-foundation figcaption{font-size:25px;font-weight:800;line-height:1.75;letter-spacing:-.035em;color:#242321}.skills-foundation figcaption em{font-style:normal;color:#b94e13}
+.foundation-diagram{display:block;width:100%;height:auto;max-width:560px;margin:24px auto 12px;overflow:visible}
+.foundation-note{font-size:14px;line-height:1.9;margin:16px 0 0;color:#776f68}.foundation-note strong{color:#38332f;font-size:17px;font-weight:bold}
+.foundation-skills{margin:16px 0 0;padding:18px 12px;background:#fff5ed;border-radius:10px;line-height:1.65}.foundation-skills>span{display:block;font-size:12px;color:#895f42;margin-bottom:7px}.foundation-skills>strong{display:block;font-size:21px;color:#a4440e;font-weight:bold}
+.career-history{margin:28px 0}.case .career-history .career-map-title{margin:0 0 16px;font-size:17px}.career-timeline{list-style:none;padding:0;margin:0;position:relative}.career-timeline:before{content:"";position:absolute;left:19px;top:22px;bottom:22px;width:2px;background:#e9c5a6}.career-timeline li{display:flex;align-items:center;gap:14px;position:relative;padding:8px 0;min-height:62px}.timeline-number{display:grid;place-items:center;width:40px;height:40px;flex:0 0 40px;border:1px solid #eed0b6;border-radius:50%;background:#fff7ef;color:#995019;font-size:12px;font-weight:bold}.career-timeline strong{font-size:15px;line-height:1.65}.career-timeline li:last-child strong{color:#a14b0d}.career-timeline li:last-child .timeline-number{background:#d96518;color:#fff;border-color:#d96518}
+.application-section .consultation-invitation{font-size:27px;line-height:1.6;font-weight:bold;color:#94420c;margin:28px 0 20px;padding:22px 12px;background:white;border-top:3px solid #e97626;border-bottom:1px solid #efd9c7;text-align:center}.mobile-break{display:none}
+@media(max-width:600px){.opening-answer{padding:4px 22px 10px}.opening-answer .short-copy{font-size:15px}.skills-foundation{padding:23px 8px 20px;border-radius:14px}.skills-foundation figcaption{font-size:clamp(15px,4.2vw,21px);letter-spacing:-.045em}.foundation-diagram{margin:22px auto 12px}.foundation-note{font-size:12px}.foundation-note strong{font-size:14px}.application-section .consultation-invitation{font-size:23px}.mobile-break{display:block}}
+@media(max-width:600px){.foundation-skills{padding:14px 8px}.foundation-skills>span{font-size:11px}.foundation-skills>strong{font-size:17px}}
+
+/* Empathy introduction variant */
+.article-title{padding-bottom:20px}
+.empathy-opening{padding:4px 38px 0;font-size:16px;line-height:1.95}
+.empathy-opening p{margin:0 0 22px;overflow-wrap:anywhere}
+.empathy-opening p:first-child strong{font-size:19px;color:#292929}
+.empathy-opening .empathy-bridge{margin:26px 0 0;padding:20px 0 24px;border-bottom:1px solid #ece4dc;color:#9a470e}
+.opening-answer{padding:26px 38px 8px}
+.opening-question{font-size:22px;line-height:1.7;margin:0 0 18px;font-weight:800;overflow-wrap:anywhere}
+.opening-answer .answer-copy,.opening-answer .answer-explanation{font-size:16px;line-height:1.95;margin:0 0 18px;overflow-wrap:anywhere}
+.opening-answer .answer-copy strong{color:#9a470e;font-weight:700}
+.opening-answer .answer-explanation{margin-bottom:0}
+.concrete-skills-example{margin:0}
+.concrete-skills-example img{display:block;width:100%;height:auto}
+@media(max-width:600px){.empathy-opening{padding:4px 22px 0;font-size:15px}.empathy-opening p:first-child strong{font-size:18px}.empathy-opening .empathy-bridge{margin-top:22px;padding-bottom:22px}.opening-answer{padding:22px 22px 8px}.opening-question{font-size:20px;line-height:1.7}.opening-answer .answer-copy,.opening-answer .answer-explanation{font-size:15px}.fv-slot{padding:16px 10px 0}}
+
+/* skills-toggle:start */
+.opening-answer .answer-copy strong{font-size:18px}
+.skills-toggle{position:relative;display:block;width:100%;padding:0;border:0;background:#fff;cursor:pointer;border-radius:16px;overflow:hidden;touch-action:manipulation}
+.skills-toggle img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+.skills-toggle img[data-skills-example]{clip-path:inset(.6%)}
+.skills-toggle:focus-visible{outline:3px solid #a74b0b;outline-offset:4px}
+.skills-toggle-hint{margin:9px 0 0;text-align:center;color:#666;font-size:12px;line-height:1.6}
+@media(max-width:600px){.opening-answer .answer-copy strong{font-size:17px}.skills-toggle-hint{font-size:11px}}
+/* skills-toggle:end */
+
+/* Keep the bridge on one line at the full LP width; wrap naturally on small screens. */
+@media(min-width:760px){.empathy-opening .empathy-bridge{white-space:nowrap}}
+.search-field small{display:block;font-size:12px;color:#666;line-height:1.6;margin-top:6px}.other-entry{display:block;margin-top:12px}.other-entry[hidden]{display:none!important}.application-form select{width:100%;min-height:46px;padding:10px;border:1px solid #ccc;border-radius:6px;background:white;color:#292929;font:inherit}.application-form input{min-height:46px}
+.floating-consultation[hidden]{display:none!important}body{padding-bottom:90px!important;background:#fff!important;margin:0!important;color:#292929;font-family:Meiryo,sans-serif}article{border:0!important;box-shadow:none!important;overflow:visible!important;max-width:760px;margin:auto}.article-head{padding:18px 28px}.unit{position:relative;padding:12px 34px;outline:2px solid transparent;outline-offset:-2px;cursor:pointer;min-height:35px}.unit:hover{outline-color:#b3cabc}.unit.selected{outline-color:#23745a;background:#f3f9f633}.unit:before{content:attr(data-number);position:absolute;top:2px;left:3px;font:10px Meiryo;color:#587268;background:#e7f0e9;padding:2px 5px;border-radius:3px;opacity:0}.unit:hover:before,.unit.selected:before{opacity:1}.no-frames .unit{outline:none!important;cursor:default}.no-frames .unit:before{display:none}.copy{font-size:16px;line-height:2;overflow-wrap:anywhere}.copy p{margin:0 0 20px}.copy p:last-child{margin-bottom:0}.copy-title{font-size:28px;line-height:1.65;font-weight:800;margin:12px 0}.copy-question{font-size:23px;line-height:1.7;font-weight:800;border-bottom:1px solid #ddd;padding:12px 0 18px;margin:0}.copy-heading{font-size:21px;line-height:1.7;font-weight:800;margin:12px 0}.copy-bridge{font-size:16px;font-weight:bold}.copy-answer strong,.copy-answer b{color:#9a470e;font-size:18px}.copy-invitation{color:#944513;font-size:26px;font-weight:bold}.copy-label{font-size:12px;color:#96501d;font-weight:bold}.unit.image-unit{padding:16px 20px}.unit img{display:block;width:100%;height:auto}.unit figure{margin:0}.image-hint{font-size:11px;text-align:center;color:#777;margin:8px 0 0}.application-form{margin:0}.unit.form-unit{padding:18px 30px}.unit.form-unit input{pointer-events:auto}.unit.form-unit button{pointer-events:auto}footer{margin-top:24px}.career-map{margin:0!important}@media(max-width:440px){.unit{padding:12px 22px}.copy{font-size:15px}.copy-title{font-size:23px}.copy-question{font-size:20px}.copy-answer strong{font-size:17px}}
+/* Fullcast editorial standard: restrained reading-first typography. */
+article{--lp-accent:#F47721;--lp-accent-dark:#C55710;--lp-tint:#FFF4EB;--lp-ink:#222;max-width:740px}
+body{font-family:"Noto Sans JP","Yu Gothic",Meiryo,sans-serif;color:#222}
+.unit,.unit:hover,.unit.selected,.no-frames .unit{outline:none!important;background:transparent!important}
+.unit:before{display:none!important;content:none!important}
+.unit.text-unit{padding:10px 34px;min-height:0}
+.copy{color:#222;font-size:16px;font-weight:400;line-height:1.85;letter-spacing:.015em;text-align:left}
+.copy p{margin:0 0 18px}
+.copy p:last-child{margin-bottom:0}
+.copy p:empty{display:none}
+.copy-title{color:#222;background:none;border:0;border-radius:0;padding:0;margin:20px 0 22px;font-size:32px;line-height:1.55;font-weight:700;letter-spacing:.01em}
+.copy-title strong,.copy-title b{color:inherit;font-size:inherit}
+.copy-bridge{background:none;border:0;border-left:2px solid #F47721;border-radius:0;padding:2px 0 2px 18px;margin:10px 0;color:#222;font-size:16px;font-weight:400;line-height:1.85}
+.copy-bridge strong,.copy-bridge b{color:inherit;font-weight:700}
+.copy-question{background:none;color:#222;border:0;border-bottom:1px solid #e7e7e7;border-radius:0;padding:0 0 14px;margin:22px 0 6px;font-size:24px;font-weight:700;line-height:1.65}
+.copy-heading{color:#222;background:none;border:0;padding:0;margin:20px 0 6px;font-size:21px;font-weight:700;line-height:1.7}
+.copy-body strong,.copy-body b,.copy-answer strong,.copy-answer b{color:inherit;font-size:inherit;font-weight:700}
+.copy-answer{background:none;border:0;padding:0;color:#222;font-size:16px;line-height:1.85;font-weight:400}
+.copy-label{color:#666;font-size:12px;font-weight:400;line-height:1.7;letter-spacing:.04em}
+.copy-invitation{color:#C55710;font-size:25px;font-weight:700;line-height:1.7;margin:24px 0 8px;background:none;padding:0;border:0}
+.article-head{padding:18px 34px;color:#666;font-size:11px;border-bottom:1px solid #eee}
+.article-head>span:first-child{border-left:2px solid #F47721;padding-left:10px}
+.unit.image-unit{padding:18px 20px}
+.form-unit .application-form{box-shadow:none;border:1px solid #e5e5e5;background:#fff}
+.floating-consultation{background:#F47721;border:0;border-radius:40px;box-shadow:0 2px 8px #00000012;font-size:14px;min-height:48px;padding:12px 18px;animation:none!important}
+.floating-consultation:hover{background:#C55710}
+.application-form button[type=submit]{background:#F47721;border-radius:5px;box-shadow:none}
+article footer{color:#666;font-size:12px;border-top:1px solid #eee;padding:24px 34px;margin-top:28px}
+@media(max-width:440px){
+ .unit.text-unit{padding:10px 22px}
+ .copy,.copy-answer,.copy-bridge{font-size:15px;line-height:1.85}
+ .copy-title{font-size:26px;line-height:1.55;padding:0;margin:16px 0 18px}
+ .copy-question{font-size:21px;line-height:1.65;padding:0 0 12px;margin-top:18px}
+ .copy-heading{font-size:19px;line-height:1.7}
+ .copy-bridge{padding:0 0 0 14px}
+ .copy-invitation{font-size:23px}
+ .copy-answer strong,.copy-answer b{font-size:inherit}
+ .article-head{padding:16px 22px;gap:10px}
+ .unit.image-unit{padding:16px 12px}
+ .unit.form-unit{padding:18px 20px}
+}
+
+/* Editor-only affordances; exported LP always uses no-frames. */
+body:not(.no-frames) .unit.selected{outline:2px solid #23745a!important;outline-offset:-2px}
+body:not(.no-frames) .unit:hover{outline:1px solid #a5c5b6!important;outline-offset:-1px}
+body:not(.no-frames) .unit.selected:before{display:block!important;content:attr(data-number)!important;opacity:1}
+.copy-title{border-top:3px solid #F47721;padding-top:18px}
+.copy-question{color:#944513;border-bottom-color:#f0c6a8}
+.copy-heading{color:#944513}
+.copy-body strong,.copy-body b,.copy-answer strong,.copy-answer b{color:#a64b12}
+.copy-bridge{border-left:3px solid #F47721}
+.copy-bridge strong,.copy-bridge b{color:#7e3f18}
+.copy-label{color:#a64b12;font-weight:700}
+.copy-invitation{color:#944513}
+/* Case heading shares the question heading's typography and underline. */
+.copy-title{border-top:0;padding-top:0}
+.copy-label{font-family:inherit;color:#944513;font-size:24px;font-weight:700;line-height:1.65;letter-spacing:.015em;border-bottom:1px solid #f0c6a8;padding:0 0 14px;margin:22px 0 6px}
+@media(max-width:440px){.copy-label{font-size:21px;line-height:1.65;padding-bottom:12px;margin-top:18px}}
+.copy-label{display:block}
+
+.floating-consultation>svg{flex-shrink:0;display:block;width:22px;height:22px}
+
+.unit{cursor:default;outline:none!important}.unit:before{display:none!important}.image-unit[role=button]{cursor:pointer}.form-unit input,.form-unit button{pointer-events:auto!important}</style><body class="no-frames"><article><header class="article-head"><span>仕事の経験を考える</span><span class="pr">広告｜フルキャストグループ</span></header><section class="unit text-unit"><h1 class="copy copy-title">業界・職種を変えて、<br>次のステージへ進む人が増えています。</h1></section><section class="unit text-unit"><div class="copy copy-body"><p>「もう少し収入が上げられたら」</p><p>「もう少し働きやすい環境で働けたら」</p><p>と思ったことはありませんか。</p><p><br></p><p>でも、他を探しても、簡単に今より良い職場が見つかるとは思えない。</p><p>自分の経験やスキルを活かすなら、今の仕事をがんばるしかないか。</p><p>そう自分に折り合いをつけていたりしないでしょうか。</p></div></section><section class="unit text-unit"><div class="copy copy-bridge"><p><strong>実は、あなたの経験やスキルを活かせる仕事は、同じ業界・職種の中だけにあるとは限りません。</strong></p><p><strong>今、他の業界・職種にチャレンジして、次のステージを見つける方が増えています。</strong></p></div></section><section class="unit text-unit"><h2 class="copy copy-question"><p>なぜ、業界・職種を越えて、次のステージへ進む人が増えているのか？</p></h2></section><section class="unit text-unit"><div class="copy copy-answer"><p>これまでの採用では、「同じ業界、同じ職種」での経験が重視されてきました。しかし、AIが専門知識を容易に代替できる今、業界・職種を問わず価値を持ち続ける「共感力や調整力といったヒューマンスキル」の重要性が高まっています。こうしたスキルが重視され、評価されるようになってきたことが、新たなステージへ進む人が増えている一因と考えられます。</p></div></section><section class="unit text-unit"><div class="copy copy-body">仕事が変われば、新しく覚える知識や手順はあります。<br>それでも、これまでの経験がゼロになるわけではありません。</div></section><section class="unit image-unit"><img src="images/img01.webp" alt="仕事に共通するスキルの比較図" data-cycle-image></section><section class="unit text-unit"><div class="copy copy-body">お客さまや同僚の話を聞く。<br>相手に合わせて、伝え方を工夫する。<br>自分では当たり前に感じていることも、<br>別の仕事で役立つ力かもしれません。</div></section><section class="unit image-unit"><img src="images/img02.png" alt="お客さまの使い方を聞き、二つの商品の違いを説明する店員" data-cycle-image></section><section class="unit text-unit"><div class="copy copy-body">たとえば、お店で商品選びに迷う方に、使い方や不安を聞く。<br>そのうえで、商品の違いを分かりやすく伝える。<br>ただ商品に詳しいだけでなく、<br>相手に合わせて対応する力を使っています。</div></section><section class="unit image-unit"><img src="images/img03.png" alt="店舗での接客と企業への提案。相手の話を聞き、説明する力を使う二つの場面" data-cycle-image></section><section class="unit text-unit"><div class="copy copy-body">扱う商品が変わっても、<br>相手の話を聞き、必要な情報を伝える場面はあります。<br>自分では当たり前に感じる工夫も、<br>ほかの会社では役立つ力になり得ます。</div></section><section class="unit image-unit"><img src="images/img04.png" alt="これまでの経験に、新しい知識を加えながら仕事を学ぶイメージ" data-cycle-image></section><section class="unit text-unit"><div class="copy copy-body">別の業界に挑戦することは、<br>今までの経験を、すべて捨てることではありません。<br>新しい知識や仕事の進め方を学びながら、<br>すでに身についた力を活かす道もあります。</div></section><section data-float-start class="unit text-unit"><div class="copy copy-label">体験談｜佐藤さんの事例</div></section><section data-float-start class="unit text-unit"><h3 class="copy copy-heading">電話対応と接客の経験が、<br>なぜIT企業の広報につながったのか。</h3></section><section data-float-start class="unit text-unit"><div class="copy copy-body">コールセンターで電話を受け、店舗で接客をしていた佐藤さん。その後に進んだのは、IT企業の広報でした。</div></section><section data-float-start class="unit text-unit"><div class="copy copy-body">電話やお店でお客さまとやりとりする仕事と、会社の情報を発信する広報。一見、離れているように見える二つの仕事。</div></section><section data-float-start class="unit text-unit"><div class="copy copy-body">その歩みの中で、佐藤さんが身につけてきた力があります。まず一つ目は——</div></section><section data-float-start class="unit text-unit"><div class="copy copy-body"><strong>工夫して説明する力</strong>です。コールセンターや店舗接客で、相手に分かりやすく伝える力を磨いてきました。</div></section><section data-float-start class="unit text-unit"><h4 class="copy copy-heading">経験の中で身につけた力を、次の仕事へ。</h4></section><section data-float-start class="unit text-unit"><div class="copy copy-body">その後は、コールセンターの立ち上げや、企業などに代わってSNSで情報を発信する仕事を経験。続いて、IT企業の広報へ進みました。</div></section><section data-float-start class="unit text-unit"><div class="copy copy-body">こうした仕事の中で身につけた、もう一つの力が、<strong>伝えたいことを形にして発信する力</strong>。会社の情報を届ける広報の仕事にも活かされています。</div></section><section data-float-start class="unit text-unit"><div class="copy copy-body">仕事が変わっても、経験はつながっている</div></section><section data-float-start class="unit text-unit"><div class="copy copy-body">電話で説明する、店舗でお客さまに伝える、SNSで発信する、企業の情報を届ける。仕事が変わっても、大切なのは<strong>相手に共感し、相手に合わせて伝えること</strong>。佐藤さんは、伝える相手や方法が変わる中でも、それまでに身につけた力を次の仕事に活かしてきました。</div></section><section class="unit image-unit"><img src="images/img05.png" alt="今のお客さま対応の経験が、営業や広報などの仕事にどうつながるか考える人" data-cycle-image></section><section class="unit text-unit"><div class="copy copy-body">では、あなたが普段している工夫は、<br>ほかにどんな仕事で活かせるのでしょうか。<br>求人に書かれた職種名だけでは、<br>今の経験とのつながりが分からないこともあります。</div></section><section class="unit image-unit"><img src="images/img06.png" alt="今の経験を活かせそうな仕事について、転職エージェントから説明を聞く相談者" data-cycle-image></section><section class="unit text-unit"><div class="copy copy-body">今すぐ転職を決めなくても、<br>普段の仕事で身についた力を、転職エージェントと一緒に言葉に。<br>企業の仕事内容や採用条件と照らし合わせながら、<br>その力をどんな仕事で活かせるか、一緒に確かめてみませんか。</div></section><section class="unit text-unit"><h2 class="copy copy-invitation">ご相談のお申し込み</h2></section><section class="unit image-unit"><img src="images/img07.png" alt="経験の活かし方を相談してみる｜ご利用の流れ" data-cycle-image></section><section class="unit form-unit"><form class="application-form"><h2 class="form-section-title" style="margin:0 0 24px;font-size:24px;border-left:4px solid #e98947;padding-left:14px">相談お申し込みフォーム</h2><fieldset><legend>ご連絡先</legend><label class="form-field"><span class="field-label">氏名<em>必須</em></span><input name="full_name" type="text" autocomplete="name" placeholder="例：山田 太郎" required=""></label><label class="form-field"><span class="field-label">メールアドレス<em>必須</em></span><input name="email" type="email" autocomplete="email" inputmode="email" placeholder="例：yamada@example.com" required=""></label><label class="form-field"><span class="field-label">電話番号<em>必須</em></span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-1234-5678" required=""></label></fieldset><fieldset><legend>現在のお仕事について</legend><p class="employment-note">※現在求職中の場合は直近の情報をご記載ください</p><div class="form-field search-field"><label class="field-label" for="search-option-1">現在の業界<em>必須</em></label><input id="search-option-1" name="current_industry" list="search-option-1-list" data-search-choice="" autocomplete="off" placeholder="文字を入力して候補を検索" aria-describedby="search-option-1-hint" required=""><datalist id="search-option-1-list"><option value="農業・林業・水産業"></option><option value="鉱業"></option><option value="建設・建築・不動産"></option><option value="メーカー・製造"></option><option value="医薬品・医療機器"></option><option value="IT・ソフトウェア・インターネット"></option><option value="通信"></option><option value="小売・販売"></option><option value="商社・卸売"></option><option value="飲食"></option><option value="宿泊・旅行・観光"></option><option value="冠婚葬祭"></option><option value="運輸・物流・倉庫"></option><option value="金融・保険"></option><option value="リース・レンタル"></option><option value="広告・マーケティング・出版・メディア"></option><option value="人材・アウトソーシング"></option><option value="コンサルティング・専門サービス"></option><option value="医療・介護・福祉"></option><option value="教育・保育"></option><option value="研究機関・学術研究"></option><option value="美容・生活関連サービス"></option><option value="警備・清掃・ビルメンテナンス"></option><option value="娯楽・スポーツ"></option><option value="電力・ガス・水道・エネルギー"></option><option value="郵便・協同組合（JA・生協など）"></option><option value="官公庁・団体"></option><option value="学生"></option><option value="その他"></option></datalist><small id="search-option-1-hint">候補にない場合は「その他」を選択してください。</small><label class="other-entry" hidden="">具体的な業界<input name="current_industry_other" type="text" placeholder="具体的にご記入ください" disabled=""></label></div><div class="form-field search-field"><label class="field-label" for="search-option-3">現在の職種<em>必須</em></label><input id="search-option-3" name="current_occupation" list="search-option-3-list" data-search-choice="" autocomplete="off" placeholder="文字を入力して候補を検索" aria-describedby="search-option-3-hint" required=""><datalist id="search-option-3-list"><option value="営業"></option><option value="接客・販売"></option><option value="バイヤー・MD"></option><option value="コールセンター・カスタマーサポート"></option><option value="一般事務・営業事務"></option><option value="秘書・受付"></option><option value="貿易事務"></option><option value="医療事務"></option><option value="経理・財務・会計"></option><option value="人事・採用・労務"></option><option value="総務・法務"></option><option value="広報・PR"></option><option value="経営企画・事業企画"></option><option value="企画・マーケティング"></option><option value="購買・調達・物流管理"></option><option value="SNS運用・Web運用"></option><option value="ITエンジニア・プログラマー"></option><option value="デザイナー・クリエイター"></option><option value="編集・記者・ライター"></option><option value="ゲーム開発"></option><option value="技術職（機械・電気設計／生産技術）"></option><option value="研究・開発"></option><option value="製造・組立・加工"></option><option value="品質管理・生産管理"></option><option value="自動車整備士・メンテナンス"></option><option value="倉庫作業・仕分け・ピッキング"></option><option value="配送・ドライバー"></option><option value="建設・施工管理・設備管理"></option><option value="建設・土木の現場作業（職人・大工・電気工事など）"></option><option value="調理・飲食サービス"></option><option value="ホテル・旅行・ブライダルサービス"></option><option value="理容・美容・エステ"></option><option value="医療・看護"></option><option value="医療専門職（薬剤師・検査技師・リハビリなど）"></option><option value="介護・福祉"></option><option value="教育・保育"></option><option value="清掃・警備"></option><option value="農業・林業・漁業の作業"></option><option value="金融専門職（融資・資産運用など）"></option><option value="コンサルタント"></option><option value="士業（会計士・税理士・弁護士など）"></option><option value="公務員"></option><option value="店長・店舗管理"></option><option value="管理職・マネジメント"></option><option value="経営者・役員"></option><option value="自営業・フリーランス"></option><option value="その他"></option></datalist><small id="search-option-3-hint">候補にない場合は「その他」を選択してください。</small><label class="other-entry" hidden="">具体的な職種<input name="current_occupation_other" type="text" placeholder="具体的にご記入ください" disabled=""></label></div><label class="form-field"><span class="field-label">現在の年収<em>必須</em></span><select name="current_annual_income" required=""><option value="">選択してください</option><option value="100万円未満">100万円未満</option><option value="100万円以上〜200万円未満">100万円以上〜200万円未満</option><option value="200万円以上〜300万円未満">200万円以上〜300万円未満</option><option value="300万円以上〜400万円未満">300万円以上〜400万円未満</option><option value="400万円以上〜500万円未満">400万円以上〜500万円未満</option><option value="500万円以上〜600万円未満">500万円以上〜600万円未満</option><option value="600万円以上〜700万円未満">600万円以上〜700万円未満</option><option value="700万円以上〜800万円未満">700万円以上〜800万円未満</option><option value="800万円以上〜900万円未満">800万円以上〜900万円未満</option><option value="900万円以上〜1000万円未満">900万円以上〜1000万円未満</option><option value="1000万円以上〜1100万円未満">1000万円以上〜1100万円未満</option><option value="1100万円以上〜1200万円未満">1100万円以上〜1200万円未満</option><option value="1200万円以上〜1300万円未満">1200万円以上〜1300万円未満</option><option value="1300万円以上〜1400万円未満">1300万円以上〜1400万円未満</option><option value="1400万円以上〜1500万円未満">1400万円以上〜1500万円未満</option><option value="1500万円以上〜1600万円未満">1500万円以上〜1600万円未満</option><option value="1600万円以上〜1700万円未満">1600万円以上〜1700万円未満</option><option value="1700万円以上〜1800万円未満">1700万円以上〜1800万円未満</option><option value="1800万円以上〜1900万円未満">1800万円以上〜1900万円未満</option><option value="1900万円以上〜2000万円未満">1900万円以上〜2000万円未満</option><option value="2,000万円以上">2,000万円以上</option></select></label></fieldset><button type="submit" class="cta-button application-submit">相談を申し込む</button><p class="application-preview-note" style="font-size:11px;line-height:1.7;color:#777;text-align:center;margin:12px 0 0">※ご入力いただいた情報は、今回のご提案にのみ利用いたします。</p><p class="application-status" role="status" aria-live="polite" hidden=""></p></form></section><footer>フルキャストグループ</footer></article><script>function setupFloating(doc){
+ const win=doc.defaultView,button=doc.createElement('button');
+ button.type='button';button.className='floating-consultation';button.hidden=true;
+ button.innerHTML='経験の活かし方を相談してみる<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v17m-6-6 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+ doc.body.append(button);
+ function update(){
+  const story=doc.querySelector('[data-float-start]'),form=doc.querySelector('.application-form'),phone=form?.querySelector('input[name="phone"]');
+  if(!story||!form){button.hidden=true;return;}
+  const h=win.innerHeight,bounds=doc.querySelector('article').getBoundingClientRect();
+  button.style.right=Math.max(12,win.innerWidth-Math.min(win.innerWidth,bounds.right)+12)+'px';
+  button.style.maxWidth=Math.max(0,Math.min(win.innerWidth,bounds.right)-Math.max(0,bounds.left)-24)+'px';
+  button.hidden=story.getBoundingClientRect().top>h-80||(doc.querySelector('.copy-invitation')||form).getBoundingClientRect().top<=80;
+ }
+ button.onclick=()=>{const form=doc.querySelector('.application-form');const heading=doc.querySelector('.copy-invitation');const target=heading||form;if(target){target.tabIndex=-1;target.focus({preventScroll:true});win.scrollTo({top:Math.max(0,win.scrollY+target.getBoundingClientRect().top-24),behavior:'smooth'});}};
+ win.addEventListener('scroll',update,{passive:true});win.addEventListener('resize',update);
+ doc.addEventListener('load',update,true);new win.MutationObserver(update).observe(doc.querySelector('article'),{childList:true,subtree:true});
+ new win.ResizeObserver(update).observe(doc.querySelector('article'));update();
+}
+setupFloating(document);
+function setupFormOptions(doc){
+  doc.addEventListener('input',handle);doc.addEventListener('change',handle);
+  doc.addEventListener('click',event=>{
+    const button=event.target.closest('.application-submit');if(!button)return;
+    event.preventDefault();const form=button.closest('form');
+    form.querySelectorAll('[data-search-choice]').forEach(input=>handle({target:input}));
+    form.querySelectorAll('input[required]:not([data-search-choice])').forEach(input=>input.setCustomValidity(input.value&&!input.value.trim()?'入力してください。':''));
+    if(form.reportValidity())complete();
+  });
+  doc.addEventListener('input',event=>{if(event.target.matches('input[required]:not([data-search-choice])'))event.target.setCustomValidity('');});
+  doc.addEventListener('submit',event=>{if(!event.target.matches('.application-form'))return;event.preventDefault();if(event.target.reportValidity())complete();});
+  function complete(){
+    let dialog=doc.querySelector('#application-complete');
+    if(!dialog){
+      const style=doc.createElement('style');style.textContent='#application-complete{border:1px solid #eadfd6;border-radius:12px;padding:32px 24px;box-sizing:border-box;max-width:calc(100vw - 32px);width:560px;color:#222;text-align:center}#application-complete::backdrop{background:rgba(0,0,0,.35)}#application-complete h2{font-size:24px;font-weight:700;color:#9a470e;margin:0 0 16px}#application-complete h2{line-height:1.6}#application-complete p{font-size:16px;line-height:1.8;margin:0 0 24px}#application-complete .message-phrase{display:inline-block;white-space:nowrap}@media(max-width:480px){#application-complete{padding:28px 16px}#application-complete h2{font-size:22px}#application-complete p{font-size:15px}}#application-complete button{background:#F47721;color:white;border:0;border-radius:6px;padding:12px 32px;font-size:16px;cursor:pointer}';doc.head.append(style);
+      dialog=doc.createElement('dialog');dialog.id='application-complete';dialog.setAttribute('aria-labelledby','application-complete-title');dialog.innerHTML='<h2 id="application-complete-title"><span class="message-phrase">お申込み</span><span class="message-phrase">ありがとうございます。</span></h2><p><span class="message-phrase">後日、案内メールを</span><span class="message-phrase">送付させていただきます。</span></p><button type="button">閉じる</button>';doc.body.append(dialog);dialog.querySelector('button').onclick=()=>dialog.close();
+    }
+    if(!dialog.open)dialog.showModal();
+  }
+  function handle(event){const input=event.target;if(!input.matches('[data-search-choice]'))return;const field=input.closest('.search-field');const other=field.querySelector('.other-entry');const extra=other.querySelector('input');const options=[...input.list.options].map(o=>o.value);const isOther=input.value==='その他';other.hidden=!isOther;extra.disabled=!isOther;extra.required=isOther;if(!isOther)extra.value='';input.setCustomValidity(input.value&&!options.includes(input.value)?'候補から選択するか、「その他」を選んで入力してください。':'');}
+}
+
+
+
+setupFormOptions(document);
+document.querySelectorAll('.image-unit').forEach(el=>{const imgs=[...el.querySelectorAll('[data-cycle-image]')];if(imgs.length<2)return;el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','画像を切り替える');function next(){const i=imgs.findIndex(x=>!x.hidden);imgs.forEach((x,j)=>x.hidden=j!==(i+1)%imgs.length);}el.addEventListener('click',next);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();next();}});});document.querySelectorAll('form').forEach(f=>f.addEventListener('submit',e=>e.preventDefault()));</script><script>
+(function(){
+  var form = document.querySelector('.application-form');
+  if(!form) return;
+  var btn = form.querySelector('.application-submit');
+  if(btn){ btn.addEventListener('click', function(e){ e.stopImmediatePropagation(); }, true); }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if(form.checkValidity && !form.checkValidity()){ if(form.reportValidity) form.reportValidity(); return; }
+    showThanks();
+  }, true);
+  function showThanks(){
+    var ov = document.createElement('div');
+    ov.setAttribute('style','position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:99999;padding:20px');
+    var box = document.createElement('div');
+    box.setAttribute('style','background:#fff;border-radius:12px;max-width:420px;width:100%;padding:40px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)');
+    box.innerHTML = '<h2 style="color:#e98947;font-size:22px;margin:0 0 12px;line-height:1.5">お申込みありがとうございます。</h2><p style="margin:0 0 24px;line-height:1.9;color:#444">後日案内メールを送付いたします。</p><button type="button" class="thanks-close" style="font:inherit;font-weight:bold;color:#fff;background:#e98947;border:none;border-radius:40px;padding:12px 32px;cursor:pointer">閉じる</button>';
+    box.querySelector('.thanks-close').addEventListener('click', function(){ ov.remove(); try{ form.reset(); }catch(_){} });
+    ov.addEventListener('click', function(ev){ if(ev.target===ov){ ov.remove(); } });
+    ov.appendChild(box);
+    document.body.appendChild(ov);
+  }
+})();
+</script>
+</body></html>
