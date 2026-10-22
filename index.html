@@ -310,7 +310,7 @@ function setupFormOptions(doc){
 
 setupFormOptions(document);
 document.querySelectorAll('.image-unit').forEach(el=>{const imgs=[...el.querySelectorAll('[data-cycle-image]')];if(imgs.length<2)return;el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','画像を切り替える');function next(){const i=imgs.findIndex(x=>!x.hidden);imgs.forEach((x,j)=>x.hidden=j!==(i+1)%imgs.length);}el.addEventListener('click',next);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();next();}});});document.querySelectorAll('form').forEach(f=>f.addEventListener('submit',e=>e.preventDefault()));</script><style id="float-vertical-override">
-.floating-consultation{writing-mode:vertical-rl;right:0 !important;left:auto !important;top:50% !important;bottom:auto !important;transform:translateY(-50%) !important;max-width:none !important;width:auto !important;min-height:0 !important;height:auto !important;padding:22px 12px !important;border:0 !important;border-radius:14px 0 0 14px !important;box-shadow:-4px 0 18px rgba(0,0,0,.2) !important;gap:12px;line-height:1.7;letter-spacing:.06em;animation:none !important}
+.floating-consultation{writing-mode:vertical-rl;right:0 !important;left:auto !important;top:auto !important;bottom:70px !important;bottom:calc(70px + env(safe-area-inset-bottom,0px)) !important;transform:none !important;max-width:none !important;width:auto !important;min-height:0 !important;height:auto !important;padding:22px 6px !important;border:0 !important;border-radius:14px 0 0 14px !important;box-shadow:-4px 0 18px rgba(0,0,0,.2) !important;gap:12px;line-height:1.7;letter-spacing:.06em;animation:none !important}
 .floating-consultation>svg{width:20px;height:20px}
 </style>
 <script>
